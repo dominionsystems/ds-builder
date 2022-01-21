@@ -1,0 +1,11 @@
+{
+  "$schema": "@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "A Dominion Deploy schematic.",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": ["install"]
+    }
+  }
+}

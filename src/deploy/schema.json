@@ -1,0 +1,15 @@
+{
+  "$id": "Schema",
+  "title": "schema",
+  "description": "Deployment of Angular CLI applications for Dominion",
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "Relative location of the Index.cshtml or MainLayout.master file (~/Ds.Source.Web/WebCore/dist/ds-source/MainLayout.master) after it has been built by @angular/cli"
+    },
+    "destination": {
+      "type": "string",
+      "description": "Relative location that you want it to be moved to"
+    }
+  }
+}
