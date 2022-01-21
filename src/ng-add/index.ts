@@ -1,10 +1,16 @@
 import { JsonParseMode, parseJson } from '@angular-devkit/core';
-import { Tree, SchematicsException, SchematicContext, Rule, chain } from '@angular-devkit/schematics';
+import {
+  Tree,
+  SchematicsException,
+  SchematicContext,
+  Rule,
+  chain,
+} from '@angular-devkit/schematics';
 import { Workspace } from '../interfaces';
 
-function getWorkspacae(host: Tree): { path: string, workspace: Workspace } {
+function getWorkspacae(host: Tree): { path: string; workspace: Workspace } {
   const possibleFiles = ['/angular.json', './angular.json'];
-  const path = possibleFiles.find(path => host.exists(path));
+  const path = possibleFiles.find((path) => host.exists(path));
   const configBuffer = path ? host.read(path) : undefined;
 
   if (!path || !configBuffer) {
@@ -15,7 +21,7 @@ function getWorkspacae(host: Tree): { path: string, workspace: Workspace } {
   let workspace: Workspace;
 
   try {
-    workspace = (parseJson(content, JsonParseMode.Loose) as {}) as Workspace;
+    workspace = parseJson(content, JsonParseMode.Loose) as {} as Workspace;
   } catch (e) {
     throw new SchematicsException(`Could not parse angular.json: ${e.message}`);
   }
@@ -57,30 +63,32 @@ export function dsBuilder(options: NgAddOptions): Rule {
       const destPathExists = tree.exists(options.destination);
 
       if (!destPathExists) {
-        throw new SchematicsException(`No file at ${options.destination} found`);
+        throw new SchematicsException(
+          `No file at ${options.destination} found`,
+        );
       }
     }
 
     // validating project name
     const project = workspace.projects[options.project];
-    if (!project) {
+    if (!project || !project.architect) {
       throw new SchematicsException(
-        'The specified Angular project is not defined in this workspace'
-    );
+        'The specified Angular project is not defined in this workspace',
+      );
     }
 
     // check for valid application
     if (project.projectType !== 'application') {
       throw new SchematicsException(
-        `Deploy requires an Angular project type of "application" in angular.json`
+        `Deploy requires an Angular project type of "application" in angular.json`,
       );
     }
 
     project.architect['deploy'] = {
-      "builder": "@ds-builder/copy-file:copy",
-      "options": {
-        "source": options.source,
-        "destination": options.destination,
+      builder: '@ds-builder/copy-file:copy',
+      options: {
+        source: options.source,
+        destination: options.destination,
       },
     };
 
@@ -90,7 +98,5 @@ export function dsBuilder(options: NgAddOptions): Rule {
 }
 
 export default function (options: NgAddOptions): Rule {
-  return chain([
-    dsBuilder(options),
-  ]);
+  return chain([dsBuilder(options)]);
 }

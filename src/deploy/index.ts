@@ -16,7 +16,7 @@ async function copyFileBuilder(
   context.reportStatus(`Copying ${options.source} to ${options.destination}.`);
   try {
     await fs.copyFile(options.source, options.destination);
-  } catch (err) {
+  } catch (err: any) {
     context.logger.error('Failed to copy file.');
     return {
       success: false,

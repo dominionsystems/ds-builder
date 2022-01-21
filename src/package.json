@@ -1,5 +1,5 @@
 {
-  "name": "@ds-builder/deploy",
+  "name": "@dominionsystems/deploy",
   "version": "1.0.0",
   "description": "Builder for deploying some files after the @angular/cli build",
   "main": "index.js",
@@ -10,10 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dominionsystems/ds-builder.get"
+    "url": "git+https://github.com/dominionsystems/ds-builder.git"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "npx tsc -p tsconfig.json",
+    "test": "echo \"No test specified\""
   },
   "keywords": [
     "angular",
@@ -46,5 +47,8 @@
     "@angular-devkit/architect": "^0.1200.0",
     "@angular-devkit/core": "^12.0.0",
     "@angular-devkit/schematics": "^12.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
