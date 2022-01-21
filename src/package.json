@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Builder for deploying some files after the @angular/cli build",
   "main": "index.js",
-  "builders": "builders.json",
-  "schematics": "collection.json",
+  "builders": "./builders.json",
+  "schematics": "./collection.json",
   "ng-add": {
     "save": "devDependencies"
   },

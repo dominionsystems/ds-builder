@@ -22,7 +22,7 @@ function getWorkspacae(host: Tree): { path: string; workspace: Workspace } {
 
   try {
     workspace = parseJson(content, JsonParseMode.Loose) as {} as Workspace;
-  } catch (e) {
+  } catch (e: any) {
     throw new SchematicsException(`Could not parse angular.json: ${e.message}`);
   }
 
